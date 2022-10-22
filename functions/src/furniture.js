@@ -1,4 +1,5 @@
-import { ObjectId } from "mongodb";
+import { ObjectId } from "mongodb"; //The ObjectId creates unique identifiers 
+//for all the documents in the database
 import dbConnect from "./dbConnect.js";
 
 export async function getAllFurniture(req, res) {
@@ -12,7 +13,9 @@ export async function getAllFurniture(req, res) {
         return; 
     });
     //send back array of furniture
-res.send(collection);
+
+    res.set('Cache-Control', 'public, max-age=300, s-maxage=600')
+res.send(collection); //cache from firebase web
 
 }
  export async function addNewFurniture(req,res) {
